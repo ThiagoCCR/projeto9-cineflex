@@ -1,43 +1,32 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useState, useEffect } from "react";
+import axios from "axios";
+import MovieBox from "./MovieBox";
 
+export default function Home() {
 
-export default function Home(){
+  const [movies, setMovies] = useState([]);
 
-    const [movies, setMovies] = useState([]);
+  useEffect(() => {
+    const promise = axios.get(
+      "https://mock-api.driven.com.br/api/v5/cineflex/movies"
+    );
 
-	const promise = axios.get("https://mock-api.driven.com.br/api/v5/cineflex/movies");
+    promise.then((res) => {
+      setMovies(res.data);
+    });
 
-	useEffect(() => {
-		const requisicao = axios.get("http://...");
+  }, []);
 
-		requisicao.then(resposta => {
-			setMovies(...promise.data);
-		});
-	}, []);
-
-    return (
-        <>
-        <header>
-            <h1>CINEFLEX</h1>
-        </header>
-        <div className="main">
-            <div className="title">
-                <h1>Selecione o filme</h1>
-            </div>
-            <div className="container">
-                <div className="movie"></div>
-                <div className="movie"></div>
-                <div className="movie"></div>
-                <div className="movie"></div>
-                <div className="movie"></div>
-                <div className="movie"></div>
-                <div className="movie"></div>
-                <div className="movie"></div>
-                <div className="movie"></div>
-                <div className="movie"></div>
-            </div>
+  return (
+      <div className="main">
+        <div className="title">
+          <h1>Selecione o filme</h1>
         </div>
-        </>
-    )
+        <div className="container movies">
+          {movies.map((movie, index) => (
+            <MovieBox key={index} url={movie.posterURL} idFilme={movie.id}/>
+          ))}
+        </div>
+      </div>
+  );
 }
