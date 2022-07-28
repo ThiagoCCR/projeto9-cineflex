@@ -131,27 +131,26 @@ footer {
   column-gap: 10px;
   padding: 20px;
   justify-content: center;
-  max-width: 390px;
 }
 
 .seat {
-  background-color: black;
   width: 26px;
   height: 26px;
   border-radius: 50%;
   margin-bottom: 18px;
   font-weight: 400;
   font-size: 11px;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.main > :nth-child(3) {
+.flex > :nth-child(3) {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
-  margin-left: auto;
-  margin-right: auto;
+  width: 100%;
 }
 
 .seat-example {
@@ -165,14 +164,8 @@ footer {
 
 .container.input {
   margin-top: 40px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
   font-size: 13px;
   font-weight: 400;
-  margin-left: 24px;
-  
 }
 
 .container.input div{
@@ -208,4 +201,30 @@ input {
 .unavailable {
   background-color: #fbe192;
   border: 1px solid #f7c52b;
+}
+
+button{
+  background-color: #e8833a;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 400;
+  font-size: 18px;
+  border: none;
+  margin-right: 15px;
+  width: 225px;
+  height: 43px;
+  border-radius: 3px;
+}
+
+.flex{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 390px;
+  margin-left: auto;
+  margin-right: auto;
+
 }

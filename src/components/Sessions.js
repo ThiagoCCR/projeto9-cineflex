@@ -10,7 +10,7 @@ export default function Sessoes() {
 
   useEffect(() => {
     const promise = axios.get(
-      `https://mock-api.driven.com.br/api/v5/cineflex/movies/${params.idFilme}/showtimes`
+      `https://mock-api.driven.com.br/api/v7/cineflex/movies/${params.idFilme}/showtimes`
     );
 
     promise.then((res) => {
