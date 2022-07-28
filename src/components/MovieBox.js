@@ -1,11 +1,9 @@
 import {Link} from "react-router-dom"
 
-
-
-export default function MovieBox({ url, idFilme}) {
+export default function MovieBox({url, idFilme}) {
 
   return (
-    <Link to="/sessoes/">
+    <Link to={`/sessoes/${idFilme}`}>
       <div className="movie">
         <img src={url} alt="Movie-box" />
       </div>

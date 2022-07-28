@@ -1,7 +1,15 @@
 export default function Footer (){
 
     return (
-        <footer></footer>
+        <footer>
+            <div>
+                img
+            </div>
+            <div>
+                titulo
+                sessao
+            </div>
+        </footer>
     )
 
 }

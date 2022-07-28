@@ -1,13 +1,21 @@
-export default function Session() {
+import { Link } from "react-router-dom";
+
+
+export default function Session({ data }) {
   return (
-    <div className="container sessions">
-      <div className="session">
-        <h2>Quinta-feira - 24/06/2021</h2>
-        <div className="container session-buttons">
-          <button>15:00</button>
-          <button>19:00</button>
+    <Link to={`/assentos/${data.id}`}>
+      <div className="container sessions">
+        <div className="session">
+          <h2>
+            {data.weekday} - {data.date}
+          </h2>
+          <div className="container session-buttons">
+            {data.showtimes.map((value) => (
+              <button>{value.name}</button>
+            ))}
+          </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
