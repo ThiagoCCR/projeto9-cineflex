@@ -227,5 +227,48 @@ button{
   max-width: 390px;
   margin-left: auto;
   margin-right: auto;
+}
 
+.green{
+  color:#247A6B;
+  font-weight: 700 !important;
+}
+
+
+/* SUCESS */
+
+.final{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.success{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  max-width: 474px;
+  padding-right: 180px;
+}
+
+.final-info{
+  margin-bottom: 40px;
+}
+
+.final-info >div{
+  display: flex;
+  flex-direction: column;
+}
+
+.final-info h2{
+  font-weight: 700;
+  font-size: 24px;
+}
+
+.final-info p {
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 40px;
 }

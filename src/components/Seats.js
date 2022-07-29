@@ -4,10 +4,13 @@ import Seat from "./Seat";
 import axios from "axios";
 import SeatExamples from "./SeatExamples";
 
+
 export default function Seats() {
   const { idSessao } = useParams();
   const [seats, setSeats] = useState([]);
   const [chosenSeats, setChosenSeats] = useState([]);
+  const [doc, setDoc] = useState("");
+  const [name, setName] = useState("");
 
   useEffect(() => {
     const promise = axios.get(
@@ -18,6 +21,13 @@ export default function Seats() {
       setSeats(res.data.seats);
     });
   }, []);
+
+  function submitData(e) {
+    e.preventDefault();
+    setName("");
+    setDoc("");
+    console.log(e.target)
+  }
 
   return (
     <div className="main">
@@ -37,17 +47,31 @@ export default function Seats() {
           ))}
         </div>
         <SeatExamples />
-        <div className="container input">
-          <div>
-            <p>Nome do Comprador:</p>
-            <input name="buyer-name" placeholder="Digite seu nome..."></input>
+        <form onSubmit={submitData}>
+          <div className="container input">
+            <div>
+              <p>Nome do Comprador:</p>
+              <input
+                name="buyer-name"
+                placeholder="Digite seu nome..."
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+              ></input>
+            </div>
+            <div>
+              <p>CPF do Comprador:</p>
+              <input
+                name="buyer-doc"
+                placeholder="Digite seu CPF..."
+                value={doc}
+                onChange={(e) => setDoc(e.target.value)}
+                required
+              ></input>
+            </div>
           </div>
-          <div>
-            <p>CPF do Comprador:</p>
-            <input name="buyer-doc" placeholder="Digite seu CPF..."></input>
-          </div>
-        </div>
-        <button>Reservar assentos(s)</button>
+          <button type="submit">Reservar assentos(s)</button>
+        </form>
       </div>
     </div>
   );
