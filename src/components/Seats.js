@@ -17,7 +17,6 @@ export default function Seats() {
     );
 
     promise.then((res) => {
-        console.log(res.data.seats)
         setSeats(res.data.seats);
     });
   }, []);

@@ -1,14 +1,31 @@
+import { useState } from "react"
+
+
 export default function Seat({isAvailable, name}){
 
-    if (isAvailable === true){
+    const [selected, setSelected] = useState(false);
+    const [state, setState] = useState("")
+
+    function selectSeat(){
+        setSelected(!selected);
+    }
+   
+    if(selected){
         return(
-            <div className="seat available">{name}</div>
+            <div className = "seat selected" onClick={selectSeat}>{name}</div>
         )
     }
-    if (isAvailable === false){
+
+    else if (isAvailable === true){
         return(
-            <div className="seat unavailable">{name}</div>
+            <div className = "seat available" onClick={selectSeat}>{name}</div>
         )
     }
+    else {
+        return(
+            <div className = "seat unavailable" onClick={selectSeat}>{name}</div>
+        )
+    }
+   
     
 }
