@@ -5,7 +5,6 @@ import Button from "./Button";
 
 export default function Session({ data }) {
 
-  console.log(data)
   return (
       <div className="container sessions">
         <div className="session">

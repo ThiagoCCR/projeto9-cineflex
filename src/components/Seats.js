@@ -4,20 +4,18 @@ import Seat from "./Seat";
 import axios from "axios";
 import SeatExamples from "./SeatExamples";
 
-
 export default function Seats() {
-
-  const params = useParams();
+  const { idSessao } = useParams();
   const [seats, setSeats] = useState([]);
-
+  const [chosenSeats, setChosenSeats] = useState([]);
 
   useEffect(() => {
     const promise = axios.get(
-      `https://mock-api.driven.com.br/api/v7/cineflex/showtimes/${params.idSessao}/seats`
+      `https://mock-api.driven.com.br/api/v7/cineflex/showtimes/${idSessao}/seats`
     );
 
     promise.then((res) => {
-        setSeats(res.data.seats);
+      setSeats(res.data.seats);
     });
   }, []);
 
@@ -28,9 +26,15 @@ export default function Seats() {
           <h1>Selecione o horário</h1>
         </div>
         <div className="container seats">
-            {seats.map((value, index) => (
-              <Seat key={index} name={value.name} isAvailable={value.isAvailable}/>
-            ))}
+          {seats.map((value, index) => (
+            <Seat
+              key={index}
+              name={value.name}
+              isAvailable={value.isAvailable}
+              chosenSeats={chosenSeats}
+              setChosenSeats={setChosenSeats}
+            />
+          ))}
         </div>
         <SeatExamples />
         <div className="container input">
