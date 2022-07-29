@@ -1,15 +1,3 @@
-export default function Footer (){
-
-    return (
-        <footer>
-            <div>
-                img
-            </div>
-            <div>
-                titulo
-                sessao
-            </div>
-        </footer>
-    )
-
+export default function Footer({ children }) {
+  return <footer>{children}</footer>;
 }

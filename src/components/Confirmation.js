@@ -1,4 +1,15 @@
-export default function Confimation() {
+import { useNavigate } from "react-router-dom";
+
+
+
+export default function Confimation(props) {
+  const navigate = useNavigate();
+
+  function Redirect(){
+    navigate('/')
+    
+  }
+
   return (
     <>
       <div className="main final">
@@ -28,7 +39,7 @@ export default function Confimation() {
             </div>
           </div>
         </div>
-        <button>Voltar pra Home</button>
+        <button onClick={Redirect}>Voltar pra Home</button>
       </div>
     </>
   );

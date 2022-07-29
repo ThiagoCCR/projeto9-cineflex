@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 import Footer from "./Footer";
 import Session from "./Session";
@@ -30,7 +30,7 @@ export default function Sessoes() {
           ))}
         </div>
       </div>
-      <Footer />
+      <Footer>aaaaaaa</Footer>
     </>
   );
 }

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 
 export default function Seat({
   isAvailable,
+  id,
   name,
   chosenSeats,
   setChosenSeats,
@@ -12,7 +13,7 @@ export default function Seat({
     isAvailable ? setSelected(!selected) : alert("Este assento não está disponível");
   }
   
-  useEffect(()=> selected ? setChosenSeats([...chosenSeats, name]) : setChosenSeats(chosenSeats.filter((value) => value !== name))
+  useEffect(()=> selected ? setChosenSeats([...chosenSeats, id]) : setChosenSeats(chosenSeats.filter((value) => value !== name))
   ,[selected]);
 
   if (selected) {

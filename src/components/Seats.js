@@ -1,9 +1,8 @@
-import { Link, useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Seat from "./Seat";
 import axios from "axios";
 import SeatExamples from "./SeatExamples";
-
 
 export default function Seats() {
   const { idSessao } = useParams();
@@ -11,6 +10,8 @@ export default function Seats() {
   const [chosenSeats, setChosenSeats] = useState([]);
   const [doc, setDoc] = useState("");
   const [name, setName] = useState("");
+  const navigate = useNavigate();
+  const objAPI = { ids: [...chosenSeats], name: name, cpf: doc };
 
   useEffect(() => {
     const promise = axios.get(
@@ -26,7 +27,18 @@ export default function Seats() {
     e.preventDefault();
     setName("");
     setDoc("");
-    console.log(e.target)
+
+    const promise = axios.post(
+      "https://mock-api.driven.com.br/api/v7/cineflex/seats/book-many",
+      objAPI
+    );
+
+    promise.then(() => {
+      console.log('oi')
+      navigate("/sucesso",  {replace:false, state: "props"});
+    });
+
+    promise.catch((err) => console.log(err.response))
   }
 
   return (
@@ -40,6 +52,7 @@ export default function Seats() {
             <Seat
               key={index}
               name={value.name}
+              id={value.id}
               isAvailable={value.isAvailable}
               chosenSeats={chosenSeats}
               setChosenSeats={setChosenSeats}
