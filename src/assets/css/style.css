@@ -13,7 +13,7 @@ a {
   text-decoration: none;
 }
 
-header {
+/* header {
   color: #e8833a;
   font-size: 34px;
   font-weight: 400;
@@ -28,9 +28,9 @@ header {
   z-index: 1;
   height: 67px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
-}
+} */
 
-footer {
+/* footer {
   position: fixed;
   height: 117px;
   left: 0px;
@@ -57,10 +57,10 @@ footer {
 .title h1 {
   font-size: 24px;
   font-weight: 400;
-}
+} */
 
 /* FIRST ROUT: HOME */
-
+/* 
 .container.movies {
   display: flex;
   justify-content: center;
@@ -82,11 +82,11 @@ footer {
 .movie img {
   width: 100%;
   height: 100%;
-}
+} */
 
 /* SECOND ROUT: SESSIONS */
 
-.container.sessions {
+/* .container.sessions {
   display: flex;
   flex-direction: column;
   margin-left: 24px;
@@ -97,8 +97,8 @@ footer {
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
-}
-
+} */
+/* 
 .container.session-buttons button {
   background-color: #e8833a;
   color: #ffffff;
@@ -112,28 +112,28 @@ footer {
   width: 83px;
   height: 43px;
   border-radius: 3px;
-}
-
+} */
+/* 
 .session h2 {
   font-weight: 400;
   font-size: 18px;
   line-height: 23px;
   margin-bottom: 22px;
   margin-top: 22px;
-}
+} */
 
 /* THIRD ROUT: SESSIONS */
 
-.container.seats {
+/* .container.seats {
   display: flex;
   flex-wrap: wrap;
   flex-direction: initial;
   column-gap: 10px;
   padding: 20px;
   justify-content: center;
-}
+} */
 
-.seat {
+/* .seat {
   width: 26px;
   height: 26px;
   border-radius: 50%;
@@ -144,41 +144,41 @@ footer {
   justify-content: center;
   align-items: center;
   cursor: pointer;
-}
-
+} */
+/* 
 .flex > :nth-child(3) {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
   width: 100%;
-}
+} */
 
-.seat-example {
+/* .seat-example {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   font-size: 13px;
   font-weight: 400;
-}
+} */
 
-.container.input {
+/* .container.input {
   margin-top: 40px;
   font-size: 13px;
   font-weight: 400;
-}
+} */
 
-.container.input div{
+/* .container.input div{
   margin-bottom: 15px;
-}
+} */
 
-.container.input p{
+/* .container.input p{
   font-size: 18px;
   font-weight: 400;
-}
+} */
 
-input {
+/* input {
   width: 327px;
   height: 51px;
   background: #ffffff;
@@ -187,9 +187,9 @@ input {
   font-style: italic;
   color: #AFAFAF;
   font-size: 18px;
-}
+} */
 
-.selected {
+/* .selected {
   background-color: #8dd7cf;
   border: 1px solid #1aae9e;
 }
@@ -202,9 +202,9 @@ input {
 .unavailable {
   background-color: #fbe192;
   border: 1px solid #f7c52b;
-}
+} */
 
-button{
+/* button{
   background-color: #e8833a;
   color: #ffffff;
   display: flex;
@@ -217,8 +217,8 @@ button{
   width: 225px;
   height: 43px;
   border-radius: 3px;
-}
-
+} */
+/* 
 .flex{
   display: flex;
   flex-direction: column;
@@ -227,33 +227,33 @@ button{
   max-width: 390px;
   margin-left: auto;
   margin-right: auto;
-}
-
+} */
+/* 
 .green{
   color:#247A6B;
   font-weight: 700 !important;
-}
+} */
 
 
 /* SUCESS */
 
-.final{
+/* .final{
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
-}
+} */
 
-.success{
+/* .success{
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
   max-width: 474px;
   padding-right: 180px;
-}
+} */
 
-.final-info{
+/* .final-info{
   margin-bottom: 40px;
 }
 
@@ -271,4 +271,4 @@ button{
   font-weight: 400;
   font-size: 22px;
   line-height: 40px;
-}
+} */

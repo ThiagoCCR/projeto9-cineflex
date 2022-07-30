@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import MovieBox from "./MovieBox";
+import Footer from "./Footer";
+import styled from "styled-components";
 
 export default function Home() {
-
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
@@ -14,19 +15,49 @@ export default function Home() {
     promise.then((res) => {
       setMovies(res.data);
     });
-
   }, []);
 
   return (
-      <div className="main">
-        <div className="title">
-          <h1>Selecione o filme</h1>
-        </div>
-        <div className="container movies">
-          {movies.map((movie, index) => (
-            <MovieBox key={index} url={movie.posterURL} idFilme={movie.id}/>
-          ))}
-        </div>
-      </div>
+    <Main>
+      <Title>
+        <h1>Selecione o filme</h1>
+      </Title>
+      <Container>
+        {movies.map((movie, index) => (
+          <MovieBox key={index} url={movie.posterURL} idFilme={movie.id} />
+        ))}
+      </Container>
+    </Main>
   );
 }
+
+const Main = styled.div`
+  margin-top: 110px;
+  margin-bottom: 80px;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+`;
+
+const Title = styled.div`
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+
+
+  h1 {
+    font-size: 24px;
+    font-weight: 400;
+    font-family: "Roboto", sans-serif !important;
+  }
+`;
+
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  column-gap: 20px;
+  box-sizing: border-box;
+`;

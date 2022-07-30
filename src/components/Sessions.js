@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import Footer from "./Footer";
 import Session from "./Session";
+import styled from "styled-components";
 
 export default function Sessoes() {
   const params = useParams();
@@ -20,17 +21,45 @@ export default function Sessoes() {
 
   return (
     <>
-      <div className="main">
-        <div className="title">
+      <Main>
+        <Title>
           <h1>Selecione o horário</h1>
-        </div>
-        <div className="container sessions">
+        </Title>
+        <Container>
           {sessions.map((value, index) => (
             <Session key={index} data={value} />
           ))}
-        </div>
-      </div>
+        </Container>
+      </Main>
       <Footer>aaaaaaa</Footer>
     </>
   );
 }
+
+const Main = styled.div`
+  margin-top: 110px;
+  margin-bottom: 80px;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+`;
+
+const Title = styled.div`
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+
+  h1 {
+    font-size: 24px;
+    font-weight: 400;
+    font-family: "Roboto", sans-serif !important;
+  }
+`;
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-left: 24px;
+`;
