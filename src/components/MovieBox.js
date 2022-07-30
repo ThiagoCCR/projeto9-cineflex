@@ -1,10 +1,18 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-export default function MovieBox({ url, idFilme, movieData, setMovieData, name}) {
+export default function MovieBox({
+  url,
+  idFilme,
+  movieData,
+  setMovieData,
+  name,
+}) {
   return (
     <Link to={`/sessoes/${idFilme}`}>
-      <Movie onClick={()=>setMovieData({...movieData, url: url, title:name} )}>
+      <Movie
+        onClick={() => setMovieData({ ...movieData, url: url, title: name })}
+      >
         <Poster src={url} alt="Movie-box" />
       </Movie>
     </Link>
@@ -21,11 +29,13 @@ const Movie = styled.div`
   box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.1);
   border-radius: 3px;
   box-sizing: border-box;
+
+  &&:hover {
+    opacity: 0.5;
+  }
 `;
 
 const Poster = styled.img`
-
-width: 100%;
-height: 100%;
-
-`
+  width: 100%;
+  height: 100%;
+`;

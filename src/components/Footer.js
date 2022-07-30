@@ -14,13 +14,14 @@ const Wrapper = styled.footer`
   bottom: 0px;
   background-color: #dfe6ed;
   border: 1px solid #dfe6ed;
-  display:flex;
+  display: flex;
   justify-content: flex-start;
-  align-items:center;
-  font-size: 26px;
-  color:#293845;
-  padding-left:20px;
-  
+  align-items: center;
+  font-size: 20px;
+  color: #293845;
+  padding-left: 20px;
+  line-height: 30px;
+
   img {
     width: 100%;
     height: 100%;
@@ -32,14 +33,14 @@ const Wrapper = styled.footer`
     background-color: #ffffff;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
     border-radius: 2px;
-    padding:8px
+    padding: 8px;
   }
 
   > :nth-child(2) {
-    margin-left:20px;
-    display:flex;
-    flex-direction:column;
-    align-items:flex-start;
-    justify-content:center;
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
   }
 `;

@@ -28,7 +28,10 @@ export default function App() {
             <Sessions movieData={movieData} setMovieData={setMovieData} />
           }
         />
-        <Route path="/assentos/:idSessao" element={<Seats movieData={movieData} setMovieData={setMovieData} />} />
+        <Route
+          path="/assentos/:idSessao"
+          element={<Seats movieData={movieData} setMovieData={setMovieData} />}
+        />
         <Route
           path="/sucesso"
           element={

@@ -1,16 +1,18 @@
 import { useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
 
-export default function Confimation(props) {
+export default function Confimation({ movieData, setMovieData }) {
   const navigate = useNavigate();
 
   const {cpf, name, seats} = useLocation().state;
 
-  console.log(cpf)
-  console.log(seats)
-  console.log(name)
-
   function Redirect() {
+    setMovieData({
+      url: "",
+      title: "",
+      session: "",
+      seats: [],
+    });
     navigate("/");
   }
 
@@ -24,15 +26,14 @@ export default function Confimation(props) {
           <FinalInfo>
             <h2>Filme e sessão</h2>
             <div>
-              <p>Enola Holmes</p>
-              <p>24/06/2021 15:00</p>
+              <p>{movieData.title}</p>
+              <p>{movieData.session}</p>
             </div>
           </FinalInfo>
           <FinalInfo>
             <h2>Ingressos</h2>
             <div>
-              <p>Enola Holmes</p>
-              <p>24/06/2021 15:00</p>
+              {movieData.seats.map(value => <p>Assento {value}</p>)}
             </div>
           </FinalInfo>
           <FinalInfo>
@@ -91,6 +92,7 @@ const Success = styled.div`
 
 const FinalInfo = styled.div`
   margin-bottom: 40px;
+  margin-left:20px;
 
   > div {
     display: flex;
@@ -105,7 +107,7 @@ const FinalInfo = styled.div`
   p {
     font-weight: 400;
     font-size: 22px;
-    line-height: 40px;
+    line-height: 25px;
   }
 `;
 

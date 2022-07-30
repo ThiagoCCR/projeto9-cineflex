@@ -7,22 +7,28 @@ export default function Seat({
   name,
   chosenSeats,
   setChosenSeats,
+  seatsName,
+  setSeatsName,
 }) {
   const [selected, setSelected] = useState(false);
 
   function selectSeat() {
-    isAvailable
-      ? setSelected(!selected)
-      : alert("Este assento não está disponível");
+    if (isAvailable) {
+      setSelected(!selected);
+    } else {
+      alert("Este assento não está disponível");
+    }
   }
 
-  useEffect(
-    () =>
-      selected
-        ? setChosenSeats([...chosenSeats, id])
-        : setChosenSeats(chosenSeats.filter((value) => value !== name)),
-    [selected]
-  );
+  useEffect(() => {
+    selected
+      ? setChosenSeats([...chosenSeats, id])
+      : setChosenSeats(chosenSeats.filter((value) => value !== id));
+
+    selected
+      ? setSeatsName([...seatsName, name])
+      : setSeatsName(seatsName.filter((value) => value !== name));
+  }, [selected]);
 
   if (selected) {
     return <SeatSelected onClick={selectSeat}>{name}</SeatSelected>;

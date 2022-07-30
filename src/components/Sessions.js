@@ -5,7 +5,7 @@ import Footer from "./Footer";
 import Session from "./Session";
 import styled from "styled-components";
 
-export default function Sessoes({movieData, setMovieData}) {
+export default function Sessoes({ movieData, setMovieData }) {
   const params = useParams();
   const [sessions, setSessions] = useState([]);
 
@@ -27,13 +27,18 @@ export default function Sessoes({movieData, setMovieData}) {
         </Title>
         <Container>
           {sessions.map((value, index) => (
-            <Session movieData={movieData} setMovieData={setMovieData} key={index} data={value} />
+            <Session
+              movieData={movieData}
+              setMovieData={setMovieData}
+              key={index}
+              data={value}
+            />
           ))}
         </Container>
       </Main>
       <Footer>
         <div>
-          <img alt="FooterPoster" src={movieData.url}/>
+          <img alt="FooterPoster" src={movieData.url} />
         </div>
         <div>
           <p>{movieData.title}</p>
@@ -49,7 +54,7 @@ const Main = styled.div`
   margin-left: auto;
   margin-right: auto;
   box-sizing: border-box;
-  overflow-y:scroll;
+  overflow-y: scroll;
 `;
 
 const Title = styled.div`

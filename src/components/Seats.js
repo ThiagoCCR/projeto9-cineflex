@@ -5,17 +5,17 @@ import axios from "axios";
 import styled from "styled-components";
 import Footer from "./Footer";
 
-export default function Seats({movieData, setMovieData}) {
+export default function Seats({ movieData, setMovieData }) {
   const { idSessao } = useParams();
   const [seats, setSeats] = useState([]);
   const [chosenSeats, setChosenSeats] = useState([]);
+  const [seatsName, setSeatsName] = useState([]);
   const [doc, setDoc] = useState("");
   const [name, setName] = useState("");
   const navigate = useNavigate();
   const objAPI = { ids: [...chosenSeats], name: name, cpf: doc };
 
-  console.log(movieData)
-
+  console.log(movieData);
 
   useEffect(() => {
     const promise = axios.get(
@@ -26,6 +26,10 @@ export default function Seats({movieData, setMovieData}) {
       setSeats(res.data.seats);
     });
   }, []);
+
+  useEffect(() => {
+    setMovieData({ ...movieData, seats: [...seatsName] });
+  }, [seatsName]);
 
   function submitData(e) {
     e.preventDefault();
@@ -38,7 +42,10 @@ export default function Seats({movieData, setMovieData}) {
     );
 
     promise.then(() => {
-      navigate("/sucesso", { replace: false, state: {cpf:doc, name:name, seats: chosenSeats} });
+      navigate("/sucesso", {
+        replace: false,
+        state: { cpf: doc, name: name, seats: chosenSeats },
+      });
     });
 
     promise.catch((err) => console.log(err.response));
@@ -46,80 +53,82 @@ export default function Seats({movieData, setMovieData}) {
 
   return (
     <>
-    <Main>
-      <Container>
-        <Title>
-          <h1>Selecione o horário</h1>
-        </Title>
-        <ContainerSeats>
-          {seats.map((value, index) => (
-            <Seat
-              key={index}
-              name={value.name}
-              id={value.id}
-              isAvailable={value.isAvailable}
-              chosenSeats={chosenSeats}
-              setChosenSeats={setChosenSeats}
-            />
-          ))}
-        </ContainerSeats>
+      <Main>
+        <Container>
+          <Title>
+            <h1>Selecione o horário</h1>
+          </Title>
+          <ContainerSeats>
+            {seats.map((value, index) => (
+              <Seat
+                key={index}
+                name={value.name}
+                id={value.id}
+                isAvailable={value.isAvailable}
+                chosenSeats={chosenSeats}
+                setChosenSeats={setChosenSeats}
+                seatsName={seatsName}
+                setSeatsName={setSeatsName}
+              />
+            ))}
+          </ContainerSeats>
+          <div>
+            <SeatExample>
+              <SeatSelected></SeatSelected>
+              <p>Selecionado</p>
+            </SeatExample>
+            <SeatExample>
+              <SeatAvailable></SeatAvailable>
+              <p>Disponível</p>
+            </SeatExample>
+            <SeatExample>
+              <SeatUnavailable></SeatUnavailable>
+              <p>Indisponível</p>
+            </SeatExample>
+          </div>
+          <form onSubmit={submitData}>
+            <ContainerInput>
+              <div>
+                <p>Nome do Comprador:</p>
+                <input
+                  name="buyer-name"
+                  placeholder="Digite seu nome..."
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  required
+                ></input>
+              </div>
+              <div>
+                <p>CPF do Comprador:</p>
+                <input
+                  name="buyer-doc"
+                  placeholder="Digite seu CPF..."
+                  value={doc}
+                  onChange={(e) => setDoc(e.target.value)}
+                  required
+                ></input>
+              </div>
+            </ContainerInput>
+            <Button type="submit">Reservar assentos(s)</Button>
+          </form>
+        </Container>
+      </Main>
+      <Footer>
         <div>
-          <SeatExample>
-            <SeatSelected></SeatSelected>
-            <p>Selecionado</p>
-          </SeatExample>
-          <SeatExample>
-            <SeatAvailable></SeatAvailable>
-            <p>Disponível</p>
-          </SeatExample>
-          <SeatExample>
-            <SeatUnavailable></SeatUnavailable>
-            <p>Indisponível</p>
-          </SeatExample>
+          <img alt="FooterPoster" src={movieData.url} />
         </div>
-        <form onSubmit={submitData}>
-          <ContainerInput>
-            <div>
-              <p>Nome do Comprador:</p>
-              <input
-                name="buyer-name"
-                placeholder="Digite seu nome..."
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                required
-              ></input>
-            </div>
-            <div>
-              <p>CPF do Comprador:</p>
-              <input
-                name="buyer-doc"
-                placeholder="Digite seu CPF..."
-                value={doc}
-                onChange={(e) => setDoc(e.target.value)}
-                required
-              ></input>
-            </div>
-          </ContainerInput>
-          <Button type="submit">Reservar assentos(s)</Button>
-        </form>
-      </Container>
-    </Main>
-    <Footer>
-    <div>
-      <img alt="FooterPoster" src={movieData.url}/>
-    </div>
-    <div>
-      <p>{movieData.title}</p>
-      <p>{movieData.session}</p>
-    </div>
-  </Footer>
-  </>
+        <div>
+          <p>{movieData.title}</p>
+          <p>{movieData.session}</p>
+        </div>
+      </Footer>
+    </>
   );
 }
 
 const Main = styled.div`
   margin-top: 110px;
-  margin-bottom: 80px;
+  margin-bottom: 150px;
   margin-left: auto;
   margin-right: auto;
   box-sizing: border-box;
@@ -143,8 +152,8 @@ const Container = styled.div`
     align-items: center;
     width: 100%;
   }
-  
-  form{
+
+  form {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -215,13 +224,13 @@ const Button = styled.button`
 `;
 
 const SeatExample = styled.div`
-display: flex;
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   font-size: 13px;
   font-weight: 400;
-`
+`;
 const SeatSelected = styled.div`
   width: 26px;
   height: 26px;
