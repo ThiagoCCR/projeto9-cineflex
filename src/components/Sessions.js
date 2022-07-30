@@ -38,7 +38,7 @@ export default function Sessoes() {
 
 const Main = styled.div`
   margin-top: 110px;
-  margin-bottom: 80px;
+  margin-bottom: 180px;
   margin-left: auto;
   margin-right: auto;
   box-sizing: border-box;
