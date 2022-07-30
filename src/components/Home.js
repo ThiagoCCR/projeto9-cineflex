@@ -4,7 +4,7 @@ import MovieBox from "./MovieBox";
 import Footer from "./Footer";
 import styled from "styled-components";
 
-export default function Home() {
+export default function Home({movieData, setMovieData}) {
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
@@ -24,7 +24,7 @@ export default function Home() {
       </Title>
       <Container>
         {movies.map((movie, index) => (
-          <MovieBox key={index} url={movie.posterURL} idFilme={movie.id} />
+          <MovieBox movieData={movieData} setMovieData={setMovieData} name={movie.title} key={index} url={movie.posterURL} idFilme={movie.id} />
         ))}
       </Container>
     </Main>

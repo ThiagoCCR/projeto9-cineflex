@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-export default function MovieBox({ url, idFilme }) {
+export default function MovieBox({ url, idFilme, movieData, setMovieData, name}) {
   return (
     <Link to={`/sessoes/${idFilme}`}>
-      <Movie>
+      <Movie onClick={()=>setMovieData({...movieData, url: url, title:name} )}>
         <Poster src={url} alt="Movie-box" />
       </Movie>
     </Link>

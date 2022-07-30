@@ -3,8 +3,9 @@ import { useState, useEffect } from "react";
 import Seat from "./Seat";
 import axios from "axios";
 import styled from "styled-components";
+import Footer from "./Footer";
 
-export default function Seats() {
+export default function Seats({movieData, setMovieData}) {
   const { idSessao } = useParams();
   const [seats, setSeats] = useState([]);
   const [chosenSeats, setChosenSeats] = useState([]);
@@ -12,6 +13,9 @@ export default function Seats() {
   const [name, setName] = useState("");
   const navigate = useNavigate();
   const objAPI = { ids: [...chosenSeats], name: name, cpf: doc };
+
+  console.log(movieData)
+
 
   useEffect(() => {
     const promise = axios.get(
@@ -34,14 +38,14 @@ export default function Seats() {
     );
 
     promise.then(() => {
-      console.log("oi");
-      navigate("/sucesso", { replace: false, state: "props" });
+      navigate("/sucesso", { replace: false, state: {cpf:doc, name:name, seats: chosenSeats} });
     });
 
     promise.catch((err) => console.log(err.response));
   }
 
   return (
+    <>
     <Main>
       <Container>
         <Title>
@@ -100,6 +104,16 @@ export default function Seats() {
         </form>
       </Container>
     </Main>
+    <Footer>
+    <div>
+      <img alt="FooterPoster" src={movieData.url}/>
+    </div>
+    <div>
+      <p>{movieData.title}</p>
+      <p>{movieData.session}</p>
+    </div>
+  </Footer>
+  </>
   );
 }
 
@@ -128,6 +142,13 @@ const Container = styled.div`
     justify-content: space-evenly;
     align-items: center;
     width: 100%;
+  }
+  
+  form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 `;
 

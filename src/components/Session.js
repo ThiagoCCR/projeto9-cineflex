@@ -1,7 +1,13 @@
-import Button from "./Button";
 import styled from "styled-components";
+import {Link} from "react-router-dom"
 
-export default function Session({ data }) {
+export default function Session({ data, movieData, setMovieData }) {
+
+
+  function updateFooter(){
+    setMovieData({...movieData, session: `${data.weekday} - ${data.date}` })
+  }
+
   return (
     <Container>
       <div>
@@ -10,7 +16,7 @@ export default function Session({ data }) {
         </h2>
         <ButtonWrapper>
           {data.showtimes.map((value, index) => (
-            <Button key={index} sessionHour={value.name} sessionId={value.id} />
+            <Link onClick={updateFooter}to={`/assentos/${value.id}`}><Buttonn>{value.name}</Buttonn></Link>
           ))}
         </ButtonWrapper>
       </div>
@@ -56,3 +62,21 @@ const ButtonWrapper = styled.div`
     border-radius: 3px;
   }
 `;
+
+const Buttonn = styled.button`
+  font-family: "Roboto", sans-serif !important;
+  box-sizing: border-box;
+  background-color: #e8833a;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 400;
+  font-size: 18px;
+  border: none;
+  margin-right: 15px;
+  width: 225px;
+  height: 43px;
+  border-radius: 3px;
+`;
+

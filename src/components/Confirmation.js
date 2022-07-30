@@ -1,8 +1,14 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
 
 export default function Confimation(props) {
   const navigate = useNavigate();
+
+  const {cpf, name, seats} = useLocation().state;
+
+  console.log(cpf)
+  console.log(seats)
+  console.log(name)
 
   function Redirect() {
     navigate("/");
@@ -32,8 +38,8 @@ export default function Confimation(props) {
           <FinalInfo>
             <h2>Comprador</h2>
             <div>
-              <p>Enola Holmes</p>
-              <p>24/06/2021 15:00</p>
+              <p>{name}</p>
+              <p>{cpf}</p>
             </div>
           </FinalInfo>
         </Success>
@@ -68,6 +74,9 @@ const Title = styled.div`
     font-family: "Roboto", sans-serif !important;
     color: #247a6b;
     font-weight: 700 !important;
+    width:60%;
+    text-align:center;
+    line-height:35px;
   }
 `;
 
