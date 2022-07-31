@@ -15,14 +15,13 @@ export default function Seats({ movieData, setMovieData }) {
   const navigate = useNavigate();
   const objAPI = { ids: [...chosenSeats], name: name, cpf: doc };
 
-  console.log(movieData);
-
   useEffect(() => {
     const promise = axios.get(
       `https://mock-api.driven.com.br/api/v7/cineflex/showtimes/${idSessao}/seats`
     );
 
     promise.then((res) => {
+      console.log(res.data)
       setSeats(res.data.seats);
     });
   }, []);

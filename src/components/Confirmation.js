@@ -39,8 +39,8 @@ export default function Confimation({ movieData, setMovieData }) {
           <FinalInfo>
             <h2>Comprador</h2>
             <div>
-              <p>{name}</p>
-              <p>{cpf}</p>
+              <p>Nome: {name}</p>
+              <p>CPF: {cpf}</p>
             </div>
           </FinalInfo>
         </Success>
@@ -86,8 +86,9 @@ const Success = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  max-width: 474px;
-  padding-right: 180px;
+  width: 100%;
+  max-width:450px;
+  padding-left: 30px;
 `;
 
 const FinalInfo = styled.div`
@@ -102,6 +103,7 @@ const FinalInfo = styled.div`
   h2 {
     font-weight: 700;
     font-size: 24px;
+    margin-bottom: 10px;
   }
 
   p {
@@ -123,6 +125,6 @@ const Button = styled.button`
   margin-right: 15px;
   width: 200px;
   height: 43px;
-  cursor:pointer
+  cursor:pointer;
   border-radius: 3px;
 `;

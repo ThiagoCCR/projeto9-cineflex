@@ -3,9 +3,12 @@ import {Link} from "react-router-dom"
 
 export default function Session({ data, movieData, setMovieData }) {
 
+  console.log(data)
 
-  function updateFooter(){
-    setMovieData({...movieData, session: `${data.weekday} - ${data.date}` })
+  function updateFooter(params){
+    
+    setMovieData({...movieData, session: `${data.date} - ${params}` })
+
   }
 
   return (
@@ -16,7 +19,7 @@ export default function Session({ data, movieData, setMovieData }) {
         </h2>
         <ButtonWrapper>
           {data.showtimes.map((value, index) => (
-            <Link onClick={updateFooter}to={`/assentos/${value.id}`}><Buttonn>{value.name}</Buttonn></Link>
+            <Link to={`/assentos/${value.id}`}><Buttonn onClick={()=>updateFooter(value.name)} key={index}>{value.name}</Buttonn></Link>
           ))}
         </ButtonWrapper>
       </div>
