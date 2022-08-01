@@ -8,6 +8,7 @@ import styled from "styled-components";
 export default function Sessoes({ movieData, setMovieData }) {
   const params = useParams();
   const [sessions, setSessions] = useState([]);
+  const [data, setData] = useState({})
 
   useEffect(() => {
     const promise = axios.get(
@@ -15,6 +16,7 @@ export default function Sessoes({ movieData, setMovieData }) {
     );
 
     promise.then((res) => {
+      setData(res.data)
       setSessions(res.data.days);
     });
   }, []);
@@ -38,10 +40,10 @@ export default function Sessoes({ movieData, setMovieData }) {
       </Main>
       <Footer>
         <div>
-          <img alt="FooterPoster" src={movieData.url} />
+          <img alt="FooterPoster" src={data.posterURL} />
         </div>
         <div>
-          <p>{movieData.title}</p>
+          <p>{data.title}</p>
         </div>
       </Footer>
     </>

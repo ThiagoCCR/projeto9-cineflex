@@ -4,7 +4,7 @@ import styled from "styled-components";
 export default function Confimation({ movieData, setMovieData }) {
   const navigate = useNavigate();
 
-  const {cpf, name, seats} = useLocation().state;
+  const {cpf, name} = useLocation().state;
 
   function Redirect() {
     setMovieData({

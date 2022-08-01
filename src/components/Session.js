@@ -3,8 +3,6 @@ import {Link} from "react-router-dom"
 
 export default function Session({ data, movieData, setMovieData }) {
 
-  console.log(data)
-
   function updateFooter(params){
     
     setMovieData({...movieData, session: `${data.date} - ${params}` })

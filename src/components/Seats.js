@@ -12,8 +12,10 @@ export default function Seats({ movieData, setMovieData }) {
   const [seatsName, setSeatsName] = useState([]);
   const [doc, setDoc] = useState("");
   const [name, setName] = useState("");
+  const [data, setData] = useState({day:{weekday:""}, name:"", movie:{title:"", posterURL:""}})
   const navigate = useNavigate();
   const objAPI = { ids: [...chosenSeats], name: name, cpf: doc };
+
 
   useEffect(() => {
     const promise = axios.get(
@@ -21,7 +23,7 @@ export default function Seats({ movieData, setMovieData }) {
     );
 
     promise.then((res) => {
-      console.log(res.data)
+      setData(res.data)
       setSeats(res.data.seats);
     });
   }, []);
@@ -114,11 +116,11 @@ export default function Seats({ movieData, setMovieData }) {
       </Main>
       <Footer>
         <div>
-          <img alt="FooterPoster" src={movieData.url} />
+          <img alt="FooterPoster" src={data.movie.posterURL} />
         </div>
         <div>
-          <p>{movieData.title}</p>
-          <p>{movieData.session}</p>
+          <p>{data.movie.title}</p>
+          <p> {data.day.weekday} - {data.name}</p>
         </div>
       </Footer>
     </>
