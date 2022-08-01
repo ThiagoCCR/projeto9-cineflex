@@ -50,6 +50,7 @@ const Main = styled.div`
   margin-left: auto;
   margin-right: auto;
   box-sizing: border-box;
+  max-width:400px;
 `;
 
 const Title = styled.div`
