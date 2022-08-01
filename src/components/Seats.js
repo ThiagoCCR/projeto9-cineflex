@@ -4,6 +4,7 @@ import Seat from "./Seat";
 import axios from "axios";
 import styled from "styled-components";
 import Footer from "./Footer";
+import Loading from "./Loading";
 
 export default function Seats({ movieData, setMovieData, setHomeButton }) {
   const { idSessao } = useParams();
@@ -12,18 +13,22 @@ export default function Seats({ movieData, setMovieData, setHomeButton }) {
   const [seatsName, setSeatsName] = useState([]);
   const [doc, setDoc] = useState("");
   const [name, setName] = useState("");
-  const [data, setData] = useState({day:{weekday:""}, name:"", movie:{title:"", posterURL:""}})
+  const [data, setData] = useState({
+    day: { weekday: "" },
+    name: "",
+    movie: { title: "", posterURL: "" },
+  });
   const navigate = useNavigate();
   const objAPI = { ids: [...chosenSeats], name: name, cpf: doc };
 
-
   useEffect(() => {
+    window.scrollTo(0, 0);
     const promise = axios.get(
       `https://mock-api.driven.com.br/api/v7/cineflex/showtimes/${idSessao}/seats`
     );
 
     promise.then((res) => {
-      setData(res.data)
+      setData(res.data);
       setSeats(res.data.seats);
     });
   }, []);
@@ -33,6 +38,11 @@ export default function Seats({ movieData, setMovieData, setHomeButton }) {
   }, [seatsName]);
 
   function submitData(e) {
+    e.preventDefault()
+    if (chosenSeats.length===0){
+      return alert("Você tem que selecionar assentos para fechar a compra")
+    }
+
     e.preventDefault();
     setName("");
     setDoc("");
@@ -43,7 +53,7 @@ export default function Seats({ movieData, setMovieData, setHomeButton }) {
     );
 
     promise.then(() => {
-      setHomeButton(false)
+      setHomeButton(false);
       navigate("/sucesso", {
         replace: false,
         state: { cpf: doc, name: name, seats: chosenSeats },
@@ -52,80 +62,87 @@ export default function Seats({ movieData, setMovieData, setHomeButton }) {
 
     promise.catch((err) => console.log(err.response));
   }
-
-  return (
-    <>
-      <Main>
-        <Container>
-          <Title>
-            <h1>Selecione o horário</h1>
-          </Title>
-          <ContainerSeats>
-            {seats.map((value, index) => (
-              <Seat
-                key={index}
-                name={value.name}
-                id={value.id}
-                isAvailable={value.isAvailable}
-                chosenSeats={chosenSeats}
-                setChosenSeats={setChosenSeats}
-                seatsName={seatsName}
-                setSeatsName={setSeatsName}
-              />
-            ))}
-          </ContainerSeats>
+  if (seats.length === 0) {
+    return <Loading />;
+  } else {
+    return (
+      <>
+        <Main>
+          <Container>
+            <Title>
+              <h1>Selecione o horário</h1>
+            </Title>
+            <ContainerSeats>
+              {seats.map((value, index) => (
+                <Seat
+                  key={index}
+                  name={value.name}
+                  id={value.id}
+                  isAvailable={value.isAvailable}
+                  chosenSeats={chosenSeats}
+                  setChosenSeats={setChosenSeats}
+                  seatsName={seatsName}
+                  setSeatsName={setSeatsName}
+                />
+              ))}
+            </ContainerSeats>
+            <div>
+              <SeatExample>
+                <SeatSelected></SeatSelected>
+                <p>Selecionado</p>
+              </SeatExample>
+              <SeatExample>
+                <SeatAvailable></SeatAvailable>
+                <p>Disponível</p>
+              </SeatExample>
+              <SeatExample>
+                <SeatUnavailable></SeatUnavailable>
+                <p>Indisponível</p>
+              </SeatExample>
+            </div>
+            <form onSubmit={submitData}>
+              <ContainerInput>
+                <div>
+                  <p>Nome do Comprador:</p>
+                  <input
+                    name="buyer-name"
+                    placeholder="Digite seu nome..."
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    required
+                  ></input>
+                </div>
+                <div>
+                  <p>CPF do Comprador:</p>
+                  <input
+                    name="buyer-doc"
+                    minlength="11"
+                    placeholder="Digite seu CPF..."
+                    value={doc}
+                    onChange={(e) => setDoc(e.target.value)}
+                    required
+                  ></input>
+                </div>
+              </ContainerInput>
+              <Button type="submit">Reservar assentos(s)</Button>
+            </form>
+          </Container>
+        </Main>
+        <Footer>
           <div>
-            <SeatExample>
-              <SeatSelected></SeatSelected>
-              <p>Selecionado</p>
-            </SeatExample>
-            <SeatExample>
-              <SeatAvailable></SeatAvailable>
-              <p>Disponível</p>
-            </SeatExample>
-            <SeatExample>
-              <SeatUnavailable></SeatUnavailable>
-              <p>Indisponível</p>
-            </SeatExample>
+            <img alt="FooterPoster" src={data.movie.posterURL} />
           </div>
-          <form onSubmit={submitData}>
-            <ContainerInput>
-              <div>
-                <p>Nome do Comprador:</p>
-                <input
-                  name="buyer-name"
-                  placeholder="Digite seu nome..."
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  required
-                ></input>
-              </div>
-              <div>
-                <p>CPF do Comprador:</p>
-                <input
-                  name="buyer-doc"
-                  placeholder="Digite seu CPF..."
-                  value={doc}
-                  onChange={(e) => setDoc(e.target.value)}
-                  required
-                ></input>
-              </div>
-            </ContainerInput>
-            <Button type="submit">Reservar assentos(s)</Button>
-          </form>
-        </Container>
-      </Main>
-      <Footer>
-        <div>
-          <img alt="FooterPoster" src={data.movie.posterURL} />
-        </div>
-        <div>
-          <p>{data.movie.title}</p>
-          <p> {data.day.weekday} - {data.name}</p>
-        </div>
-      </Footer>
-    </>
-  );
+          <div>
+            <p>{data.movie.title}</p>
+            <p>
+              {" "}
+              {data.day.weekday} - {data.name}
+            </p>
+          </div>
+        </Footer>
+      </>
+    );
+  }
 }
 
 const Main = styled.div`

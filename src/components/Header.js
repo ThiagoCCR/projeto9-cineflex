@@ -68,6 +68,9 @@ const HeaderHome = styled.div`
       display:flex;
       justify-content:center;
       align-items:center;
+      position:absolute;
+      top:15px;
+      left:15px;
     }
 
 

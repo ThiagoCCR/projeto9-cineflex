@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import MovieBox from "./MovieBox";
-import Footer from "./Footer";
 import styled from "styled-components";
+import Loading from "./Loading";
 
-export default function Home({movieData, setMovieData, setHomeButton}) {
-  const [movies, setMovies] = useState([]);
+export default function Home({ movieData, setMovieData, setHomeButton }) {
+  const [movies, setMovies] = useState(null);
 
   useEffect(() => {
-    setHomeButton(false)
+    setHomeButton(false);
     const promise = axios.get(
       "https://mock-api.driven.com.br/api/v7/cineflex/movies"
     );
@@ -18,18 +18,30 @@ export default function Home({movieData, setMovieData, setHomeButton}) {
     });
   }, []);
 
-  return (
-    <Main>
-      <Title>
-        <h1>Selecione o filme</h1>
-      </Title>
-      <Container>
-        {movies.map((movie, index) => (
-          <MovieBox setHomeButton={setHomeButton} movieData={movieData} setMovieData={setMovieData} name={movie.title} key={index} url={movie.posterURL} idFilme={movie.id} />
-        ))}
-      </Container>
-    </Main>
-  );
+  if (movies == null) {
+    return <Loading />;
+  } else {
+    return (
+      <Main>
+        <Title>
+          <h1>Selecione o filme</h1>
+        </Title>
+        <Container>
+          {movies.map((movie, index) => (
+            <MovieBox
+              setHomeButton={setHomeButton}
+              movieData={movieData}
+              setMovieData={setMovieData}
+              name={movie.title}
+              key={index}
+              url={movie.posterURL}
+              idFilme={movie.id}
+            />
+          ))}
+        </Container>
+      </Main>
+    );
+  }
 }
 
 const Main = styled.div`
@@ -46,7 +58,6 @@ const Title = styled.div`
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
-
 
   h1 {
     font-size: 24px;

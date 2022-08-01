@@ -1,10 +1,20 @@
+import { useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
 
 export default function Confimation({ movieData, setMovieData }) {
   const navigate = useNavigate();
 
-  const {cpf, name} = useLocation().state;
+  const { cpf, name } = useLocation().state;
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  function formatCpf (cpf){
+    let CPF = cpf.toString()
+    return CPF.slice(0,3) + "." + CPF.slice(3,6) + "." + CPF.slice(6,9) + "-" + CPF.slice(9,11)
+}
 
   function Redirect() {
     setMovieData({
@@ -33,14 +43,16 @@ export default function Confimation({ movieData, setMovieData }) {
           <FinalInfo>
             <h2>Ingressos</h2>
             <div>
-              {movieData.seats.map(value => <p>Assento {value}</p>)}
+              {movieData.seats.map((value) => (
+                <p>Assento {value}</p>
+              ))}
             </div>
           </FinalInfo>
           <FinalInfo>
             <h2>Comprador</h2>
             <div>
               <p>Nome: {name}</p>
-              <p>CPF: {cpf}</p>
+              <p>CPF: {formatCpf(cpf)}</p>
             </div>
           </FinalInfo>
         </Success>
@@ -75,9 +87,9 @@ const Title = styled.div`
     font-family: "Roboto", sans-serif !important;
     color: #247a6b;
     font-weight: 700 !important;
-    width:60%;
-    text-align:center;
-    line-height:35px;
+    width: 60%;
+    text-align: center;
+    line-height: 35px;
   }
 `;
 
@@ -87,13 +99,13 @@ const Success = styled.div`
   justify-content: center;
   align-items: flex-start;
   width: 100%;
-  max-width:450px;
+  max-width: 450px;
   padding-left: 30px;
 `;
 
 const FinalInfo = styled.div`
   margin-bottom: 40px;
-  margin-left:20px;
+  margin-left: 20px;
 
   > div {
     display: flex;
@@ -125,6 +137,6 @@ const Button = styled.button`
   margin-right: 15px;
   width: 200px;
   height: 43px;
-  cursor:pointer;
+  cursor: pointer;
   border-radius: 3px;
 `;
