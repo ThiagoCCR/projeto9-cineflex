@@ -5,7 +5,7 @@ import axios from "axios";
 import styled from "styled-components";
 import Footer from "./Footer";
 
-export default function Seats({ movieData, setMovieData }) {
+export default function Seats({ movieData, setMovieData, setHomeButton }) {
   const { idSessao } = useParams();
   const [seats, setSeats] = useState([]);
   const [chosenSeats, setChosenSeats] = useState([]);
@@ -43,6 +43,7 @@ export default function Seats({ movieData, setMovieData }) {
     );
 
     promise.then(() => {
+      setHomeButton(false)
       navigate("/sucesso", {
         replace: false,
         state: { cpf: doc, name: name, seats: chosenSeats },
@@ -142,7 +143,7 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  max-width: 390px;
+  width: 390px;
   margin-left: auto;
   margin-right: auto;
 

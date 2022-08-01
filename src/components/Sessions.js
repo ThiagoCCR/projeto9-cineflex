@@ -5,7 +5,7 @@ import Footer from "./Footer";
 import Session from "./Session";
 import styled from "styled-components";
 
-export default function Sessoes({ movieData, setMovieData }) {
+export default function Sessoes({ movieData, setMovieData, setHomeButton }) {
   const params = useParams();
   const [sessions, setSessions] = useState([]);
   const [data, setData] = useState({})

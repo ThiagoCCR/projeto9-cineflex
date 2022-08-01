@@ -4,10 +4,11 @@ import MovieBox from "./MovieBox";
 import Footer from "./Footer";
 import styled from "styled-components";
 
-export default function Home({movieData, setMovieData}) {
+export default function Home({movieData, setMovieData, setHomeButton}) {
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
+    setHomeButton(false)
     const promise = axios.get(
       "https://mock-api.driven.com.br/api/v7/cineflex/movies"
     );
@@ -24,7 +25,7 @@ export default function Home({movieData, setMovieData}) {
       </Title>
       <Container>
         {movies.map((movie, index) => (
-          <MovieBox movieData={movieData} setMovieData={setMovieData} name={movie.title} key={index} url={movie.posterURL} idFilme={movie.id} />
+          <MovieBox setHomeButton={setHomeButton} movieData={movieData} setMovieData={setMovieData} name={movie.title} key={index} url={movie.posterURL} idFilme={movie.id} />
         ))}
       </Container>
     </Main>

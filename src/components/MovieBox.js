@@ -7,11 +7,18 @@ export default function MovieBox({
   movieData,
   setMovieData,
   name,
+  setHomeButton
 }) {
+
+  function updateStates (){
+    setHomeButton(true);
+    setMovieData({ ...movieData, url: url, title: name })
+  }
+
   return (
     <Link to={`/sessoes/${idFilme}`}>
       <Movie
-        onClick={() => setMovieData({ ...movieData, url: url, title: name })}
+        onClick={updateStates}
       >
         <Poster src={url} alt="Movie-box" />
       </Movie>

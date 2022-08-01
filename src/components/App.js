@@ -13,24 +13,25 @@ export default function App() {
     session: "",
     seats: [],
   });
+  const [homeButton, setHomeButton] = useState(false);
 
   return (
     <BrowserRouter>
-      <Header />
+      <Header homeButton={homeButton}/>
       <Routes>
         <Route
           path="/"
-          element={<Home movieData={movieData} setMovieData={setMovieData} />}
+          element={<Home movieData={movieData} setMovieData={setMovieData} setHomeButton={setHomeButton} />}
         />
         <Route
           path="/sessoes/:idFilme"
           element={
-            <Sessions movieData={movieData} setMovieData={setMovieData} />
+            <Sessions movieData={movieData} setMovieData={setMovieData}/>
           }
         />
         <Route
           path="/assentos/:idSessao"
-          element={<Seats movieData={movieData} setMovieData={setMovieData} />}
+          element={<Seats movieData={movieData} setMovieData={setMovieData} setHomeButton={setHomeButton}/>}
         />
         <Route
           path="/sucesso"
